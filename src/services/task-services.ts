@@ -14,7 +14,9 @@ interface CreateTaskData {
 
 export const getAllTasks = async () => {
   try {
-    const response = await fetch("http://localhost:8080/tasks");
+    const response = await fetch(
+      "https://todolist-spring-azure.azurewebsites.net/tasks"
+    );
     if (!response.ok) {
       throw new Error(
         "Failed to get tasks" + `${response.status} ${response.statusText}`
@@ -32,11 +34,14 @@ export const getAllTasks = async () => {
 
 export const createTask = async (data: CreateTaskData) => {
   try {
-    const response = await fetch(`http://localhost:8080/tasks`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `https://todolist-spring-azure.azurewebsites.net/tasks`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
     if (!response.ok) {
       throw new Error(
         "Failed to Create Task " + `${response.status} ${response.statusText}`
@@ -54,11 +59,14 @@ export const createTask = async (data: CreateTaskData) => {
 
 export const updateTask = async (id: number, data: UpdateTaskData) => {
   try {
-    const response = await fetch(`http://localhost:8080/tasks/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `https://todolist-spring-azure.azurewebsites.net/tasks/${id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
     if (!response.ok) {
       throw new Error(
         "Failed to Update Task " + `${response.status} ${response.statusText}`
@@ -75,7 +83,10 @@ export const updateTask = async (id: number, data: UpdateTaskData) => {
 };
 
 export const deleteTask = async (id: number) => {
-  return await fetch(`http://localhost:8080/tasks/${id}`, { method: "DELETE" })
+  return await fetch(
+    `https://todolist-spring-azure.azurewebsites.net/tasks/${id}`,
+    { method: "DELETE" }
+  )
     .then((res) => console.log(res))
     .catch(() => false);
 };
